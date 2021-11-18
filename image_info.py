@@ -53,15 +53,22 @@ class ImageInfo:
         self._gray_matrix = ArrayElement(app, (np.array(image) * 255).astype(int)[:, :, 0])
         self._binary_matrix = ArrayElement(app, (self._gray_matrix.array >= (binary_threshold * 255)).astype(int))
         self._binary_image = ImageElement(app, self._binary_matrix.array * 255)
+        self._standard_vector = ArrayElement(app, self._binary_matrix.array.mean(axis=0))
 
-    def init_image_label(self, row: int, column: int):
-        self._gray_image.init_label(row, column)
+    def show_gray_image(self, row: int, column: int):
+        self.show_element(self._gray_image, row, column)
 
-    def init_gray_label(self, row: int, column: int):
-        self._gray_matrix.init_label(row, column)
+    def show_gray_matrix(self, row: int, column: int):
+        self.show_element(self._gray_matrix, row, column)
 
-    def init_binary_label(self, row: int, column: int):
-        self._binary_matrix.init_label(row, column)
+    def show_binary_matrix(self, row: int, column: int):
+        self.show_element(self._binary_matrix, row, column)
 
-    def init_binary_image_label(self, row: int, column: int):
-        self._binary_image.init_label(row, column)
+    def show_binary_image(self, row: int, column: int):
+        self.show_element(self._binary_image, row, column)
+
+    def show_standard_vector(self, row: int, column: int):
+        self.show_element(self._standard_vector, row, column)
+
+    def show_element(self, element: TK_Element, row: int, column: int):
+        element.init_label(row, column)

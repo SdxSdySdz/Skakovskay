@@ -43,11 +43,11 @@ class App(Application):
 
         for i in range(0, 2):
             img_info: ImageInfo = self._image_infos[i]
-            img_info.init_image_label(1, i)
-            img_info.init_gray_label(2, i)
-            img_info.init_binary_label(3, i)
-            img_info.init_binary_image_label(4, i)
-
+            img_info.show_gray_image(1, i)
+            img_info.show_gray_matrix(2, i)
+            img_info.show_binary_image(3, i)
+            img_info.show_binary_matrix(4, i)
+            img_info.show_standard_vector(5, i)
 
 if __name__ == "__main__":
     app = App(title="Sample application")
