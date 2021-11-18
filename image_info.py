@@ -25,11 +25,11 @@ class ImageInfo:
     def show_gray_matrix(self, row: int, column: int):
         self.show_element(self._gray_matrix, row, column)
 
-    def show_binary_matrix(self, row: int, column: int):
-        self.show_element(self._binary_matrix, row, column)
-
     def show_binary_image(self, row: int, column: int):
         self.show_element(self._binary_image, row, column)
+
+    def show_binary_matrix(self, row: int, column: int):
+        self.show_element(self._binary_matrix, row, column)
 
     def show_standard_vector(self, row: int, column: int):
         self.show_element(self._standard_vector, row, column)
