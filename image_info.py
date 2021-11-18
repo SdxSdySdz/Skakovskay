@@ -13,26 +13,11 @@ class ImageInfo:
         self._standard_vector = ArrayElement(app, self._binary_matrix.array.mean(axis=0))
 
     def show(self, column: int):
-        self.show_gray_image(1, column)
-        self.show_gray_matrix(2, column)
-        self.show_binary_image(3, column)
-        self.show_binary_matrix(4, column)
-        self.show_standard_vector(5, column)
-
-    def show_gray_image(self, row: int, column: int):
-        self.show_element(self._gray_image, row, column)
-
-    def show_gray_matrix(self, row: int, column: int):
-        self.show_element(self._gray_matrix, row, column)
-
-    def show_binary_image(self, row: int, column: int):
-        self.show_element(self._binary_image, row, column)
-
-    def show_binary_matrix(self, row: int, column: int):
-        self.show_element(self._binary_matrix, row, column)
-
-    def show_standard_vector(self, row: int, column: int):
-        self.show_element(self._standard_vector, row, column)
+        self.show_element(self._gray_image, 1, column)
+        self.show_element(self._gray_matrix, 2, column)
+        self.show_element(self._binary_image, 3, column)
+        self.show_element(self._binary_matrix, 4, column)
+        self.show_element(self._standard_vector, 5, column)
 
     @staticmethod
     def show_element(element: TK_Element, row: int, column: int):
