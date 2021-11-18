@@ -43,8 +43,4 @@ class App(Application):
 
         for i in range(0, 2):
             img_info: ImageInfo = self._image_infos[i]
-            img_info.show_gray_image(1, i)
-            img_info.show_gray_matrix(2, i)
-            img_info.show_binary_image(3, i)
-            img_info.show_binary_matrix(4, i)
-            img_info.show_standard_vector(5, i)
+            img_info.show(i)

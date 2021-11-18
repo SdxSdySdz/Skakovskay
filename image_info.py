@@ -12,6 +12,13 @@ class ImageInfo:
         self._binary_image = ImageElement(app, self._binary_matrix.array * 255)
         self._standard_vector = ArrayElement(app, self._binary_matrix.array.mean(axis=0))
 
+    def show(self, column: int):
+        self.show_gray_image(1, column)
+        self.show_gray_matrix(2, column)
+        self.show_binary_image(3, column)
+        self.show_binary_matrix(4, column)
+        self.show_standard_vector(5, column)
+
     def show_gray_image(self, row: int, column: int):
         self.show_element(self._gray_image, row, column)
 
