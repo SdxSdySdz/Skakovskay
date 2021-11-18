@@ -1,8 +1,8 @@
-import tkinter as tk
-import matplotlib.image as MatplotlibImage
-
-from PIL import ImageTk, Image
+from PIL import Image
 from image_info import ImageInfo
+
+import tkinter as tk
+
 
 first_img_path = "img/1.jpg"
 second_img_path = "img/2.jpg"
@@ -48,6 +48,7 @@ class App(Application):
             img_info.show_binary_image(3, i)
             img_info.show_binary_matrix(4, i)
             img_info.show_standard_vector(5, i)
+
 
 if __name__ == "__main__":
     app = App(title="Sample application")
