@@ -1,5 +1,6 @@
 from PIL import Image
-from image_info import ImageInfo
+from class_representative import ClassRepresentative
+from representative_viewer import RepresentativeViewer
 
 import tkinter as tk
 
@@ -32,15 +33,9 @@ class App(Application):
     def create_widgets(self):
         super().create_widgets()
 
-        threshold = .5
+        delta = .5
+        first_representative = ClassRepresentative(self, Image.open(first_img_path), delta)
+        second_representative = ClassRepresentative(self, Image.open(second_img_path), delta)
 
-        self._image_infos = (
-            ImageInfo(self, Image.open(first_img_path), threshold),
-            ImageInfo(self, Image.open(second_img_path), threshold),
-        )
-
-        self._img_size = (400, 400)
-
-        for i in range(0, 2):
-            img_info: ImageInfo = self._image_infos[i]
-            img_info.show(i)
+        RepresentativeViewer.view(first_representative, column=0)
+        RepresentativeViewer.view(second_representative, column=1)
