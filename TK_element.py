@@ -7,11 +7,15 @@ import tkinter as tk
 class TK_Element:
     @property
     def array(self):
-        return self._array
+        return self._array.copy()
 
     @property
     def array_as_string(self):
         return str(self._array)
+
+    @property
+    def shape(self):
+        return self._array.shape
 
     def __init__(self, app, array: np.ndarray):
         self._app = app
