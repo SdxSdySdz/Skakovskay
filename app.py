@@ -33,12 +33,14 @@ class App(Application):
     def create_widgets(self):
         super().create_widgets()
 
-        delta = .5
+        delta = 25
         first_representative = ClassRepresentative(self, Image.open(first_img_path), delta)
         second_representative = ClassRepresentative(self, Image.open(second_img_path), delta)
 
         first_representative.solve_distances_matrix(second_representative)
         second_representative.solve_distances_matrix(first_representative)
+
+        first_representative.solve_kfe()
 
         RepresentativeViewer.view(first_representative, column=0)
         RepresentativeViewer.view(second_representative, column=1)
