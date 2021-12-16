@@ -90,7 +90,6 @@ class ClassRepresentative:
             axis=1,
             arr=c_pred) / distance_matrix.shape[1]
 
-
         alpha = characteristics[:, 2]
         beta = characteristics[:, 1]
         d1 = characteristics[:, 0]
