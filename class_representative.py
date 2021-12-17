@@ -77,7 +77,6 @@ class ClassRepresentative:
         centroid_distance = (self._standard_vector.array != other._standard_vector.array).sum()
         distance_matrix = np.copy(self._distance_matrix.array)
 
-        print(centroid_distance)
         d = np.array([i for i in range(0, centroid_distance + 1)])
         # d = np.array([i for i in range(0, 100)])
 
@@ -111,6 +110,7 @@ class ClassRepresentative:
         with pd.ExcelWriter(f'{excel_file_name}.xlsx') as writer:
             characteristics.to_excel(writer, sheet_name='characteristics_1')
 
+        return characteristics
 
 # class ClassRepresentativeFactory:
 #     @classmethod

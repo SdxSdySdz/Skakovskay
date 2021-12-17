@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from PIL import Image
 from class_representative import ClassRepresentative
 from representative_viewer import RepresentativeViewer
@@ -35,31 +36,40 @@ class App(Application):
     def create_widgets(self):
         super().create_widgets()
 
-        # delta = 39
-        # first_representative = ClassRepresentative(self, Image.open(first_img_path), delta)
-        # second_representative = ClassRepresentative(self, Image.open(second_img_path), delta)
-        #
-        # first_representative.solve_distances_matrix(second_representative)
-        # second_representative.solve_distances_matrix(first_representative)
-        #
-        # first_representative.solve_characteristics(second_representative, "first_representative_output")
-        # second_representative.solve_characteristics(first_representative, "second_representative_output")
-        #
-        # plt.plot(range(0, len(first_representative.kfes)), first_representative.kfes)
-        # plt.plot(range(0, len(second_representative.kfes)), second_representative.kfes)
-        # plt.show()
+        delta = 45
+
+        f, (ax1, ax2) = plt.subplots(1, 2, sharey=True)
+        ax1.set_xlabel(f'distances (current delta {delta})')
+        ax1.set_ylabel('kfe')
+
+        ax2.set_xlabel('delta')
+
+
+        first_representative = ClassRepresentative(self, Image.open(first_img_path), delta)
+        second_representative = ClassRepresentative(self, Image.open(second_img_path), delta)
+
+        first_representative.solve_distances_matrix(second_representative)
+        second_representative.solve_distances_matrix(first_representative)
+
+        first_representative.solve_characteristics(second_representative, "before")
+        second_representative.solve_characteristics(first_representative, "second_representative_output")
+
+        ax1.plot(range(0, len(first_representative.kfes)), first_representative.kfes)
+        # ax1.plot(range(0, len(second_representative.kfes)), second_representative.kfes)
 
         kfes = []
         optimal_kfe, optimal_delta = 0, 0
-        for delta in range(20, 100):
+        delta_range = list(range(20, 100))
+        for delta in delta_range:
+            print(f'=== delta {delta} ===')
             first_representative = ClassRepresentative(self, Image.open(first_img_path), delta)
             second_representative = ClassRepresentative(self, Image.open(second_img_path), delta)
 
             first_representative.solve_distances_matrix(second_representative)
             second_representative.solve_distances_matrix(first_representative)
 
-            first_representative.solve_characteristics(second_representative, "first_representative_output")
-            second_representative.solve_characteristics(first_representative, "second_representative_output")
+            characteristics = first_representative.solve_characteristics(second_representative, "none")
+            second_representative.solve_characteristics(first_representative, "none")
 
             kfe = np.max(first_representative.kfes)
             kfes.append(kfe)
@@ -68,6 +78,14 @@ class App(Application):
                 optimal_kfe = kfe
                 optimal_delta = delta
 
+                with pd.ExcelWriter('after.xlsx') as writer:
+                    characteristics.to_excel(writer, sheet_name='characteristics_1')
+
+
+
         print(optimal_kfe, optimal_delta)
-        plt.plot(range(0, len(kfes)), kfes)
+
+        ax2.plot(delta_range, kfes)
+        ax2.scatter(optimal_delta, optimal_kfe, c='red')
+
         plt.show()
